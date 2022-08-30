@@ -466,7 +466,7 @@ int main(int argc, char **argv)
 			endClock(begin2);
     		}
     	
-    /* LIST message */
+    	/* LIST message */
 	/*Format: l(c)*/		
     	} else if (strstr(tempStr, "l") != NULL){
     		printf("LIST message\n");
@@ -545,10 +545,10 @@ int main(int argc, char **argv)
 	memset(m1.filename, 0, strlen(m1.filename));
 	memset(m1.filename2, 0, strlen(m1.filename2));
 	memset(m1.filedata, 0, strlen(m1.filedata));
-    memset(tempStr, 0, strlen(tempStr));
-    memset(Filedata, 0, strlen(Filedata));
-    memset(buff, 0, strlen(buff));
-    file = NULL;	
+    	memset(tempStr, 0, strlen(tempStr));
+    	memset(Filedata, 0, strlen(Filedata));
+    	memset(buff, 0, strlen(buff));
+    	file = NULL;	
 	}
     	Close(clientfd); //line:netp:echoclient:close
     	exit(0);
