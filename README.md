@@ -14,7 +14,7 @@ In order to run the program, create two directories and place the files from thi
 
 Then, in the command prompt, navigate to the directories you created and type in `make`. This will create executable files that can then be run. You will need to do this for both directories. Then, navigate to the directory containing `echoserveri.c` and type into the command prompt `./echoserveri 8000 x`. The 8000 stands for the port number, and 8000 is the default. The `x` stands for a secret key, which can be any integer, and will be needed later.
 
-**If you run into file permission problems, you need to run `chmod +x <FileName>` in the command prompt to give execution permission to the files.**
+**If you run into file permission problems, you need to run `chmod +x FileName` in the command prompt to give execution permission to the files.**
 
 Then, navigate to the directory containing `echoclient.c` and type into the command prompt `./echoclient ipAddress 8000 x`. To connect the client to a server on a different machine, type in the ip address of the machine the server is on in place of `ipAddress`. To host the server and client on the same machine, type in `localhost` in place of `ipAddress`. Again, the `x` stands for the secret key. If the secret key doesn't match the one given when running `echoserveri.c`, the program will exit.
 
@@ -26,37 +26,52 @@ The documentation for the different functionalities are listed below. They can a
 
 ## Documentation
 ### STORE
-Creates a file `<FileName>` with data `<Filedata>`.
+Creates a file `FileName` with data `Filedata`.
 
-Format: `s <Filename> <Filedata>` 
+Format: `s Filename Filedata` 
 
-Type `c:` before `<Filename>` to store the file to the cloud. 
+Type `c:` before `Filename` to store the file to the cloud. 
 
-Add a space after `<Filename>` to create an empty file.
+Add a space after `Filename` to create an empty file.
 
-**`<FileName>` is assumed to have no spaces.**
+**`FileName` is assumed to have no spaces.**
+
+**Example: `s Hello.txt Hello` will create a file `Hello.txt` with content `Hello`.**
+
+**`s c:Hello.txt Hello` will do the same thing, except `Hello.txt` will be created in the cloud server**
 
 **WARNING: Creating a new file with a name that matches an already existing file will override the previous file without warning.**
 
 ### RETRIEVE
 
-Retrieves and prints the contents of `<FileName>`.
+Retrieves and prints the contents of `FileName`.
 
-Format: `r <Filename>`
+Format: `r Filename`
 
-Type `c:` before `<Filename>` to retrieve data from a file stored in the cloud.
+Type `c:` before `Filename` to retrieve data from a file stored in the cloud.
 
-Returns an error if `<Filename>` does not exist.
+Returns an error if `Filename` does not exist.
+
+**Example: `r Hello.txt` will print the contents of `Hello.txt` to the console, given it exists.**
+
+**`r c:Hello.txt` will do the same thing, except the program will look for `Hello.txt` in the cloud server**
+
+
 
 ### COPY
 
 Copies a file.
 
-Format: `c <Filename> <Filename2>`
+Format: `c Filename Filename2`
 
-Type `c:` before `<Filename>` to copy a file from the cloud to local storage, type `c`: before `<Filename2>` to copy a file from local storage to the cloud, and type `c`: before both `<Filename>` and `<Filename2>` to copy a file within the cloud. Do not type c: before `<Filename>` or `<Filename2>` to copy a file locally.
+Type `c:` before `Filename` to copy a file from the cloud to local storage, type `c`: before `Filename2` to copy a file from local storage to the cloud, and type `c`: before both `Filename` and `Filename2` to copy a file within the cloud. Do not type c: before `Filename` or `Filename2` to copy a file locally.
 
-Returns an error if `<Filename>` does not exist.
+Returns an error if `Filename` does not exist.
+
+**Example: `c Hello.txt HelloCopy.txt` will copy the contents of `Hello.txt`, given it exists, to a new file `HelloCopy.txt`**
+
+**`c Hello.txt c:HelloCopy.txt` will do the same thing, except `HelloCopy.txt` will be created in the cloud server**
+
 
 **WARNING: Like the store function, copying to a file whose name matches with one that already exists will override the previous file without warning.**
 
@@ -64,11 +79,15 @@ Returns an error if `<Filename>` does not exist.
 
 Deletes a file.
 
-Format: `d <Filename>`
+Format: `d Filename`
 
-Type `c:` before `<Filename>` to delete a file in the cloud.
+Type `c:` before `Filename` to delete a file in the cloud.
 
-Returns error if `<Filename>` does not exist.
+Returns error if `Filename` does not exist.
+
+**Example: `d Hello.txt` will delete the contents of `Hello.txt`, given it exists**
+
+**`d c:Hello.txt` will do the same thing, except the program will look for `Hello.txt` in the cloud storage to delete**
 
 ### LIST
 
